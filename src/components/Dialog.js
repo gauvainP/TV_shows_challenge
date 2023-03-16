@@ -1,30 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Pagination, Layout, Space, Button, Modal, Image } from 'antd';
+import { Row, Col, Pagination, message, Layout, Space, Button, Modal, Image } from 'antd';
 import axios from "axios";
 
 
 const Dialog = ({ isOpen, show, handleChangeIsOpen }) => { //or props in general
   const [anecdote, setAnecdote] = useState(null);
+  const [messageApi, contextHolder] = message.useMessage();
 
 
   function getAnecdote() {
-    axios.get('http://numbersapi.com/' + show.releaseYear).then(res => {
-
-
-
+    axios.get('http://numbersapi.com/' + show.releaseYear).
+    then(res => {
       console.log(res.data);
       setAnecdote(res.data);
 
     }
-    ).catch(err =>
-      console.log(err));
+    ).catch(err => {
 
+
+      setAnecdote('Sorry we do not currently have a fun fact');
+      alert('Wrong date');
+      messageApi.open({
+        type: 'error',
+        content: 'Wrong date'
+      });
+      
+      console.log(err);
+
+    })
   }
 
   useEffect(() => {
 
 
     getAnecdote();
+
   }, [show]);
 
 
@@ -37,14 +47,16 @@ const Dialog = ({ isOpen, show, handleChangeIsOpen }) => { //or props in general
         title={show.title}
         centered
         open={isOpen}
+        closable={false}
         okText='Close'
-
+        afterClose={() => handleChangeIsOpen(false)}
         cancelButtonProps={{ style: { display: 'none' } }}
         onOk={() => handleChangeIsOpen(false)}
         // onCancel={() => handleChangeIsOpen(false)} no need
         width={1000}
       >
         <Row>
+
 
           <Col md={12} xs={24} >
             <Image src={show.hasOwnProperty('images') && show['images']['Poster Art']['url']} />
@@ -72,7 +84,7 @@ const Dialog = ({ isOpen, show, handleChangeIsOpen }) => { //or props in general
                 <h5> {show.description}</h5>
               </Col>
             </Row>
-            <Row  className="detailColumn" justify='start' align={'left'} style={{ margin: '10%' }} >
+            <Row className="detailColumn" justify='start' align={'left'} style={{ margin: '10%' }} >
               <Col xs={12}>
                 <h2> Year</h2>
               </Col>
