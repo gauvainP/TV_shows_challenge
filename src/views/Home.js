@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Pagination, Layout } from 'antd';
 import '../css/home.css';
+import TopBanner from "../components/TopBanner";
 const Home = () => {
 
     const [type, setType] = useState('series'); //Or movie according to the json file
@@ -18,16 +19,11 @@ const Home = () => {
     return (
         <div className="Home">
 
-            <Row className="popular_titles" xs={24} >
-                <Col span={6} offset={4} >
-                    <h1 style={{ color: 'white', fontStyle: 'italic', fontWeight: '500' }}>  Popular titles </h1>
-                </Col>
-
-            </Row>
+       <TopBanner text='Popular Titles' />
 
             <Row gutter={[24, 0]} align='left' style={{padding: '6%'}} >
                 <Col xs={4} >
-                    <div className="card_format" >
+                    <div onClick={()=>{window.location.href= '/series'}} className="card_format" >
                         SERIES
 
                     </div>
@@ -36,7 +32,7 @@ const Home = () => {
                     </div>
                 </Col>
                 <Col xs={4} >
-                    <div className="card_format" >
+                    <div className="card_format"  onClick={()=>{window.location.href= '/movies'}} >
                         MOVIES
 
                     </div>

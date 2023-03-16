@@ -14,8 +14,10 @@ code {
 
 
 .content{
-
+min-height: 70vh;
 height: 100%;
 overflow-y: scroll;
+
+
 
 }

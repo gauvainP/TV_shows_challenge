@@ -15,10 +15,13 @@ const { Header, Footer, Content } = Layout;
 
 function filterPerType(type){
 
-
-return json['entries'].filter(function(i) {
+const filteredData = json['entries'].filter(function(i) {
   return i.programType === type;
 });
+
+console.log(filteredData);
+
+return filteredData;
 
 
 
@@ -36,9 +39,9 @@ function App() {
             <Routes>
 
               <Route exact path="/" element={<Home />} />
-              <Route path="/movies" element={<MoviesPage shows={()=>{filterPerType('movie')}}/>} />
+              <Route path="/movies" element={<MoviesPage shows={filterPerType('movie')}/>} />
 
-              <Route path="/series" element={<SeriesPage shows={()=>{filterPerType('serie')}} />} />
+              <Route path="/series" element={<SeriesPage shows={filterPerType('series')} />} />
 
               <Route path="*" element={<Home />} />
 
