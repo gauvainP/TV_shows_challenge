@@ -4,11 +4,30 @@ import TopBanner from "../components/TopBanner";
 import '../css/showsPage.css';
 import PaginationComponent from "../components/PaginationComponent";
 import imageNotFound from '../images/ImageNotFound.png';
+import Dialog from "../components/Dialog";
 
 const maxValues = 18;
 
 const MoviesPage = ({ shows }) => {
     const [pageValues, setPageValues] = useState({ minValue: 0, maxValue: maxValues });
+    const [isOpen, setIsOpen] = useState(false);
+    const [show, setShow] = useState({title: ''});
+
+
+
+const handleChangeIsOpen = (status, item) =>{
+
+    setIsOpen(status);
+    if(!status){
+        setShow({});
+    
+    }else{
+        setShow(item);
+    }
+    
+    
+    }
+
 
     const handleChange = (value) => {
         let newPageValues = {
@@ -36,7 +55,9 @@ const MoviesPage = ({ shows }) => {
                     {
                         shows.slice(pageValues.minValue, pageValues.maxValue).map(movie =>
                             <Col xs={12} md={8} lg={4} >
-                                <div className="card_format" style={{ backgroundImage: `url(${movie['images']['Poster Art']['url'] || imageNotFound})` }} >
+                                <div 
+                                onClick={() =>{handleChangeIsOpen(true, movie )} }
+                                className="card_format" style={{ backgroundImage: `url(${movie['images']['Poster Art']['url'] || imageNotFound})` }} >
 
 
                                 </div>
@@ -54,6 +75,7 @@ const MoviesPage = ({ shows }) => {
                 <PaginationComponent pagesNumber={shows.length} maxValues={maxValues} handleChange={handleChange} />
 
             </div>
+            <Dialog handleChangeIsOpen={handleChangeIsOpen} isOpen={isOpen} show={show} />
 
         </div>
     )

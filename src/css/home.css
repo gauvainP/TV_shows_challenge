@@ -17,7 +17,7 @@
     width: 135px;
     line-height: 250px;
     background-color: black;/* Should have used img tag in case image not found */
-    background-image: url(../images/ImageNotFound.png);
+    background-image: url(../images/movie_clap.jpg);
     background-size: contain;
     /* background-size: cover; */
     color: white;
