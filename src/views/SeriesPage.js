@@ -14,11 +14,9 @@ const SeriesPage = ({ shows }) => {
 const handleChangeIsOpen = (status, item) =>{
 
 setIsOpen(status);
-if(!status){
-    setShow({});
-
-}else{
+if(status){
     setShow(item);
+
 }
 
 
