@@ -26,7 +26,7 @@ const SeriesPage = ({ shows }) => {
 
             <div className="SeriesPage" >
 
-                <Row gutter={[24, 24]} xs={24} >
+                <Row gutter={[0, 24]} xs={24} >
 
                     {
                         shows.slice(pageValues.minValue, pageValues.maxValue).map(movie =>
