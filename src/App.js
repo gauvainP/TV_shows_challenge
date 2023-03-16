@@ -1,23 +1,59 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Layout, Pagination, Row } from 'antd';
+import Home from './views/Home';
+import SeriesPage from './views/SeriesPage';
+import MoviesPage from './views/MoviesPage';
+import FooterComponent from './components/FooterComponent';
+import HeaderComponent from './components/HeaderComponent';
+import json from './Ressources/shows.json';
+
+
+const { Header, Footer, Content } = Layout;
+
+
+function filterPerType(type){
+
+
+return json['entries'].filter(function(i) {
+  return i.programType === type;
+});
+
+
+
+}
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+
+        <Layout>
+          <HeaderComponent />
+          <Content className='content'>
+            <Routes>
+
+              <Route exact path="/" element={<Home />} />
+              <Route path="/movies" element={<MoviesPage shows={()=>{filterPerType('movie')}}/>} />
+
+              <Route path="/series" element={<SeriesPage shows={()=>{filterPerType('serie')}} />} />
+
+              <Route path="*" element={<Home />} />
+
+            </Routes>
+
+
+          </Content>
+          <Footer className='footer'>
+            <FooterComponent />
+          </Footer>
+        </Layout>
+
+
+      </Router>
+
     </div>
   );
 }
