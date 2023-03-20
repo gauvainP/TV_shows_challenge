@@ -5,22 +5,11 @@ import PaginationComponent from "../components/PaginationComponent";
 import Dialog from "../components/Dialog";
 
 const maxValues = 18;
-const SeriesPage = ({ shows }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [show, setShow] = useState({title: ''});
+const SeriesPage = ({ shows, isOpen, handleChangeIsOpen, show }) => {
 
 
 
-const handleChangeIsOpen = (status, item) =>{
 
-setIsOpen(status);
-if(status){
-    setShow(item);
-
-}
-
-
-}
 
 
     const [pageValues, setPageValues] = useState({ minValue: 0, maxValue: maxValues });

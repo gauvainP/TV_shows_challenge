@@ -5,27 +5,11 @@ import '../css/showsPage.css';
 import PaginationComponent from "../components/PaginationComponent";
 import imageNotFound from '../images/ImageNotFound.png';
 import Dialog from "../components/Dialog";
-
 const maxValues = 18;
 
-const MoviesPage = ({ shows }) => {
+const MoviesPage = (props) => {
     const [pageValues, setPageValues] = useState({ minValue: 0, maxValue: maxValues });
-    const [isOpen, setIsOpen] = useState(false);
-    const [show, setShow] = useState({title: ''});
-
-
-
-const handleChangeIsOpen = (status, item) =>{
-
-    setIsOpen(status);
-    if(status){
-        setShow(item);
-    
-    }
-    
-    
-    }
-
+   const { shows, isOpen, handleChangeIsOpen, show } = props;
 
     const handleChange = (value) => {
         let newPageValues = {
@@ -35,17 +19,13 @@ const handleChangeIsOpen = (status, item) =>{
         setPageValues(newPageValues)
     };
 
-
     useEffect(() => {
 
-
     }, []);
-
 
     return (
         <div>
             <TopBanner text='Popular Movies' />
-
             <div className="MoviesPage" >
 
                 <Row gutter={[0, 24]} xs={24} >
@@ -53,11 +33,9 @@ const handleChangeIsOpen = (status, item) =>{
                     {
                         shows.slice(pageValues.minValue, pageValues.maxValue).map(movie =>
                             <Col xs={12} md={8} lg={4} >
-                                <div 
-                                onClick={() =>{handleChangeIsOpen(true, movie )} }
-                                className="card_format" style={{ backgroundImage: `url(${movie['images']['Poster Art']['url'] || imageNotFound})` }} >
-
-
+                                <div
+                                    onClick={() => { handleChangeIsOpen(true, movie) }}
+                                    className="card_format" style={{ backgroundImage: `url(${movie['images']['Poster Art']['url'] || imageNotFound})` }} >
                                 </div>
                                 <div style={{ textAlign: 'left' }} >
                                     {movie.title}
@@ -81,4 +59,4 @@ const handleChangeIsOpen = (status, item) =>{
 
 
 
-export default MoviesPage;
+export default React.memo(MoviesPage);

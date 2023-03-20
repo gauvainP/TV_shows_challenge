@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,memo } from "react";
 import { Row, Col, Pagination, message, Layout, Space, Button, Modal, Image } from 'antd';
 import axios from "axios";
 
@@ -32,7 +32,8 @@ const Dialog = ({ isOpen, show, handleChangeIsOpen }) => { //or props in general
 
   useEffect(() => {
 
-
+    console.log(show);
+if(show.hasOwnProperty('description'))
     getAnecdote();
 
   }, [show]);
@@ -67,44 +68,44 @@ const Dialog = ({ isOpen, show, handleChangeIsOpen }) => { //or props in general
           <Col md={12} xs={24} >
 
             <Row className="detailColumn" justify='start' align={'left'} style={{ margin: '10%' }} >
-              <Col xs={12}>
+              <Col md={12} xs={24}>
                 <h2> Title</h2>
               </Col>
-              <Col xs={12}>
-                <h5> {show.title}</h5>
+              <Col md={12} xs={24}>
+                <h5> {show['title']}</h5>
               </Col>
             </Row>
 
 
             <Row className="detailColumn" justify='start' align={'left'} style={{ margin: '10%' }} >
-              <Col xs={12}>
+              <Col md={12} xs={24}>
                 <h2> Description</h2>
               </Col>
-              <Col xs={12}>
+              <Col md={12} xs={24}>
                 <h5> {show.description}</h5>
               </Col>
             </Row>
             <Row className="detailColumn" justify='start' align={'left'} style={{ margin: '10%' }} >
-              <Col xs={12}>
+              <Col md={12} xs={24}>
                 <h2> Year</h2>
               </Col>
-              <Col xs={12}>
+              <Col md={12} xs={24}>
                 <h5> {show.releaseYear}</h5>
               </Col>
             </Row>
             <Row className="detailColumn" justify='start' align={'left'} style={{ margin: '10%' }} >
-              <Col xs={12}>
+              <Col md={12} xs={24}>
                 <h2> Type</h2>
               </Col>
-              <Col xs={12}>
+              <Col md={12} xs={24}>
                 <h5> {show.programType}</h5>
               </Col>
             </Row>
             <Row className="detailColumn" justify='start' align={'left'} style={{ margin: '10%' }} >
-              <Col xs={12}>
+              <Col md={12} xs={24}>
                 <h2> Fun fact</h2>
               </Col>
-              <Col xs={12}>
+              <Col md={12} xs={24}>
                 <h5> {anecdote}</h5>
               </Col>
             </Row>
@@ -124,4 +125,4 @@ const Dialog = ({ isOpen, show, handleChangeIsOpen }) => { //or props in general
 
 
 
-export default Dialog;
+export default memo(Dialog);
