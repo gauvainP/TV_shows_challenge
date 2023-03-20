@@ -4,7 +4,7 @@ import { Row, Col, Pagination, Layout } from 'antd';
 const PaginationComponent = ({maxValues, pagesNumber, handleChange}) => {
 
   
-console.log(maxValues)
+
 
 
 

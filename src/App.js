@@ -23,7 +23,7 @@ const filteredData = json['entries'].filter(function(i) {
   return i.programType === type;
 });
 
-console.log(filteredData);
+
 
 return filteredData;
 
@@ -35,8 +35,8 @@ function App() {
    const [show, setShow] = useState({title: ''});
 
 
-  const sho = useSelector((state) =>  state );
-console.log(sho)
+  // const getShow = useSelector((state) =>  state ); //or store
+
 
 
   const handleChangeIsOpen = (status, item) =>{

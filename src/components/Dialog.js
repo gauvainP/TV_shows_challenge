@@ -11,7 +11,6 @@ const Dialog = ({ isOpen, show, handleChangeIsOpen }) => { //or props in general
   function getAnecdote() {
     axios.get('http://numbersapi.com/' + show.releaseYear).
     then(res => {
-      console.log(res.data);
       setAnecdote(res.data);
 
     }
@@ -32,7 +31,7 @@ const Dialog = ({ isOpen, show, handleChangeIsOpen }) => { //or props in general
 
   useEffect(() => {
 
-    console.log(show);
+
 if(show.hasOwnProperty('description'))
     getAnecdote();
 
